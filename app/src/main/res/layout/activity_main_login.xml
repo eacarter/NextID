@@ -25,14 +25,19 @@
         android:visibility="gone"
         />
 
-    <Spinner
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_below="@id/text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-        android:id="@+id/spinner"
-        android:layout_alignTop="@+id/text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
-        android:visibility="gone"/>
-
+        android:requiresFadingEdge="vertical"
+        >
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:layout_alignTop="@+id/text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="37dp"
+            android:visibility="gone"/>
+    </ScrollView>
 </RelativeLayout>

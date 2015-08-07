@@ -2,53 +2,57 @@ package com.appsolutions.nextid;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Spinner;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
+import android.content.Intent;
 import android.widget.Toast;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 import com.parse.Parse;
-import com.parse.FindCallback;
 
-import java.util.ArrayList;
 
 
 public class MainLoginActivity extends ActionBarActivity  {
 
     TextView h1;
     TextView h2;
-    Spinner p;
+    ListView p;
     Animation fader;
 
-    ArrayList<String> pen15 = new ArrayList<String>();
+    ParseQueryAdapter<ParseObject> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
 
-        Parse.initialize(this, "sIEautr3KKdQl4HGdd4ta1AQb0K5XuqGtbtrnx3o", "XbgFAfCivupf0XJ8nSfx0OX5mjRBDQEBx0QoZFS0");
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("companies");
-        query.selectKeys(Arrays.asList("compName"));
-
+        adapter = new ParseQueryAdapter<ParseObject>(this, "companies");
+        adapter.setTextKey("compName");
 
         h1 = (TextView)findViewById(R.id.welcome);
         h2 = (TextView)findViewById(R.id.text);
-        p = (Spinner)findViewById(R.id.spinner);
+        p = (ListView)findViewById(R.id.spinner);
 
+        AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
 
+           public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainLoginActivity.this, ActualLoginActivity.class);
+                intent.putExtra("compName", adapter.getItem(position).getString("compName"));
+                startActivity(intent);
+           }
 
-
+        };
+        p.setOnItemClickListener(listener);
 
         fader = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
@@ -59,8 +63,14 @@ public class MainLoginActivity extends ActionBarActivity  {
         p.setVisibility(View.VISIBLE);
         p.setAnimation(fader);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pen15);
         p.setAdapter(adapter);
+
+
+    }
+
+    public void onBackPressed(){
+        this.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
 
     }
 

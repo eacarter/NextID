@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.appsolutions.nextid" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".ParKeysLOL"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,9 +23,15 @@
             android:name=".MainLoginActivity"
             android:label="@string/title_activity_main_login"
             android:parentActivityName=".LoginActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.appsolutions.nextid.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".ActualLoginActivity"
+            android:label="@string/title_activity_actual_login"
+            android:parentActivityName=".MainLoginActivity" >
+        </activity>
+        <activity
+            android:name=".keyCard"
+            android:label="@string/title_activity_key_card" >
         </activity>
     </application>
 

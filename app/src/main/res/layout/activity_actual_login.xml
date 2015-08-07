@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.appsolutions.nextid.ActualLoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="80dp"
+        android:layout_centerHorizontal="true"
+        android:text="Welcome"
+        android:textSize="15pt"
+        android:id="@+id/welcomeText"/>
+
+    <TextView
+        android:id="@+id/employment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/welcomeText"
+        android:textAllCaps="true"
+        android:textColor="#81CFE0"
+        android:text="PlaceHolder"
+        android:textSize="15pt"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/employment"
+        android:layout_centerHorizontal="true"
+        android:text="Employee"
+        android:textSize="15pt"
+        android:id="@+id/employeeText"/>
+
+    <EditText
+        android:id="@+id/textfield1"
+        android:hint="Username"
+        android:paddingTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below= "@id/employeeText" />
+
+    <EditText
+        android:id="@+id/textfield2"
+        android:hint="Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below= "@id/textfield1" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/check"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textfield2"
+        android:text="Remember me"/>
+
+    <TextView
+        android:id="@+id/sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="40dp"
+        android:textSize="20pt"
+        android:text="Submit"/>
+
+</RelativeLayout>
