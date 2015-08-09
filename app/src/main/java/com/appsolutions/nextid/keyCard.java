@@ -78,7 +78,7 @@ public class keyCard extends ActionBarActivity {
 
                                 bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 
-                                profpic.setImageBitmap(Bitmap.createScaledBitmap(bitmap, 210, 180, false));
+                                profpic.setImageBitmap(Bitmap.createScaledBitmap(bitmap, 180, 210, false));
 
 
 
@@ -139,11 +139,11 @@ public class keyCard extends ActionBarActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         Bitmap bp = (Bitmap) data.getExtras().get("data");
-        profpic.setImageBitmap(bp);
+        profpic.setImageBitmap(Bitmap.createScaledBitmap(bp, 180, 210, false));
 
         ByteArrayOutputStream blob = new ByteArrayOutputStream();
 
-        bp.compress(Bitmap.CompressFormat.PNG, 0 /* ignored for PNG */, blob);
+        bp.compress(Bitmap.CompressFormat.JPEG, 100 /* ignored for PNG */, blob);
 
         byte[] imgArray = blob.toByteArray();
 
