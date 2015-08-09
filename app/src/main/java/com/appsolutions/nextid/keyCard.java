@@ -23,6 +23,7 @@ import com.parse.ParseUser;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class keyCard extends ActionBarActivity {
@@ -38,6 +39,9 @@ public class keyCard extends ActionBarActivity {
     String pos;
     String objID;
     Bitmap bitmap;
+    Byte [] data;
+
+    ParseUser parseUser;
     boolean buto = true;
 
     @Override
@@ -74,7 +78,9 @@ public class keyCard extends ActionBarActivity {
 
                                 bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 
-                                profpic.setImageBitmap(bitmap);
+                                profpic.setImageBitmap(Bitmap.createScaledBitmap(bitmap, 210, 180, false));
+
+
 
                             } else {
 
@@ -111,19 +117,18 @@ public class keyCard extends ActionBarActivity {
             @Override
             public void onClick(View view) {
 
-                if(buto == false) {
+                if(buto == true) {
                     unlock.setImageResource(R.drawable.unlockicon);
 
                     // code for NFC turn on goes here
 
-                    buto = true;
-                }
-                else{
+                    buto = false;
+                } else {
                     unlock.setImageResource(R.drawable.lockicon);
 
                     // code for NFC turn off goes here
 
-                    buto = false;
+                    buto = true;
                 }
             }
         });
@@ -135,6 +140,19 @@ public class keyCard extends ActionBarActivity {
 
         Bitmap bp = (Bitmap) data.getExtras().get("data");
         profpic.setImageBitmap(bp);
+
+        ByteArrayOutputStream blob = new ByteArrayOutputStream();
+
+        bp.compress(Bitmap.CompressFormat.PNG, 0 /* ignored for PNG */, blob);
+
+        byte[] imgArray = blob.toByteArray();
+
+        //Assign Byte array to ParseFile
+        ParseFile parseImagefile = new ParseFile("profile_pic.png", imgArray);
+
+        parseUser.getCurrentUser().put("profPic", parseImagefile);
+        parseUser.getCurrentUser().saveInBackground();
+
 
         //addidtional code to push data up to parse goes here;
     }
